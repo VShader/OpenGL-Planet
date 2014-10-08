@@ -36,9 +36,6 @@ class Sunsystem : public Tree<Planet>
 public:
     void run();
 
-//    void addPlanet(Planet *planet);
-//    void addSubSystem();
-//    int getSubSystems();
 
 
 
@@ -46,7 +43,6 @@ private:
     Tree<Planet> *position;
 
     void run(Leaf<Planet> *currentPlanet, QMatrix4x4 &mat);
-//    void rekDelete(TreeElement partTree);
 };
 }
 

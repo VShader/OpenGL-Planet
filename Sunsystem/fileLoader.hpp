@@ -20,12 +20,7 @@ class VecFloat3
 public:
     VecFloat3() {}
     VecFloat3(GLfloat x, GLfloat y, GLfloat z) : x(x), y(y), z(z) {}
-    //VecFloat3(const VecFloat3&) = default;
-    //VecFloat3(VecFloat3&&) = default;
-    //VecFloat3(VecFloat3&& ref) :x(std::move(ref.x)), y(std::move(ref.y)), z(std::move(ref.z)) {qDebug() << "move constructor";}
-    //VecFloat3(const VecFloat3& ref) :x(ref.x), y(ref.y), z(ref.z) {qDebug() << "copy constructor";}
 
-    //VecFloat3& operator=(VecFloat3&& ref) = default;
 
     bool operator==(const VecFloat3& ref) const {return x==ref.x && y==ref.y && z==ref.z;}
 
@@ -176,7 +171,7 @@ private:
     };
 
 };
-// noch zu implementieren o, s, usemtl, mtllib
+// TODO o, s, usemtl, mtllib
 
 
 

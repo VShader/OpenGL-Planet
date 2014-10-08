@@ -31,7 +31,6 @@ Mesh FileLoader::loadObj(const std::string& path)
     std::string type;
     std::string line;
 
-//    while(getline(ifs, in)) result.push_back(in);
 
     while(ifs >> type)
     {
@@ -122,7 +121,6 @@ void FileLoader::calcNormals(Mesh& object)
             VecFloat3 u = p2-p1;
             VecFloat3 v = p3-p1;
             tempVec = u.crossProduct(v);
-//            tempVec.normalize();
 
             // if normal is in index add new normal to old
             normal[index1].push_back(tempVec);

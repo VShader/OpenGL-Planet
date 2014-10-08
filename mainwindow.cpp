@@ -58,9 +58,6 @@ MainWindow::MainWindow()
 {
 
     control->show();
-
-//    connect(control, &ControlWidget::closing, this, &MainWindow::close);
-//    connect(this, &QWindow::close, control, &QWidget::close);
     connect(control, &ControlWidget::speedChanged, this, &MainWindow::setSpeed);
 }
 
@@ -140,54 +137,10 @@ void MainWindow::initialize()
         glEnableVertexAttribArray(m_normal);
 
 
-//        glClearBufferSubData(GL_ELEMENT_ARRAY_BUFFER, myMesh->);
-
-
-        // Try different indicies
-//        glBufferData(GL_ELEMENT_ARRAY_BUFFER, myMesh->vn_f.size()*sizeof(GLuint), &myMesh->vn_f[0], GL_STATIC_DRAW);
-
-//        glGenBuffers(1, &colorBuffer);
-//        glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-//        glBufferData(GL_ARRAY_BUFFER, myMesh->vn.size()*sizeof(GLfloat), &myMesh->vn[0], GL_STATIC_DRAW);
-
-//        glVertexAttribPointer(m_colAttr, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-//        glEnableVertexAttribArray(m_colAttr);
-
-
-//        glGenBuffers(1, &indexBuffer);
-//        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-//        glBufferData(GL_ELEMENT_ARRAY_BUFFER, myMesh->v_f.size()*sizeof(GLuint), &myMesh->v_f[0], GL_STATIC_DRAW);
-
         lightPositions.push_back( {0.0f, 0.0f, 5.0f, 1.0f});
         lightPositions.push_back( {5.0f, 0.0f, 0.0f, 1.0f});
         lightPositions.push_back( {5.0f, 3.0f, 0.0f, 1.0f});
 
-
-//        GLuint gbuffer;
-//        GLuint gbuffer_tex[3];
-
-//        glGenFramebuffers(1, &gbuffer);
-//        glBindFramebuffer(GL_FRAMEBUFFER, gbuffer);
-
-//        glGenTextures(3, gbuffer_tex);
-//        glBindTexture(GL_TEXTURE_2D, gbuffer_tex[0]);
-//        glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32UI, width(), height());
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-//        glBindTexture(GL_TEXTURE_2D, gbuffer_tex[1]);
-//        glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width(), height());
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-//        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-//        glBindTexture(GL_TEXTURE_2D, gbuffer_tex[2]);
-//        glTexStorage2D(GL_TEXTURE_2D, 1, GL_DEPTH_COMPONENT32F, width(), height());
-
-//        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, gbuffer_tex[0], 0);
-//        glFramebufferTexture(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, gbuffer_tex[1], 0);
-//        glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, gbuffer_tex[2], 0);
-
-//        glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 
 }
@@ -284,15 +237,6 @@ void MainWindow::render()
     viewMatrix.rotate(45, 1, 0, 0);
 
 
-//    GLuint normalAtt = m_program->attributeLocation("normal");
-//    glVertexAttribPointer(m_posAttr, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-//    glVertexAttribPointer(m_colAttr, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-//    glVertexAttribPointer(m_posAttr, 3, GL_FLOAT, GL_FALSE, 0, &myMesh->v[0]);
-//    glVertexAttribPointer(m_colAttr, 3, GL_FLOAT, GL_FALSE, 0, colors);
-
-//    glVertexAttribPointer(m_colAttr, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-//    glEnableVertexAttribArray(m_posAttr);
-//    glEnableVertexAttribArray(m_colAttr);
     QVector3D ambient(0.2, 0.2, 0.2);
     QVector3D diffuse_albedo(1.0, 0.88, 0.25);
     QVector3D specular_albedo(1.0, 1.0, 1.0);
@@ -301,14 +245,7 @@ void MainWindow::render()
 
     for(cg::Planet* n : vecPlanet)
     {
-
-        //glEnable(GL_BLEND);
-        //glDisable(GL_DEPTH_TEST);
-        //glBlendFunc( GL_ONE , GL_ONE);
-
-
         m_program->setUniformValue(m_mv_matrix, n->resultmatrix);
-        //glUniformMatrix4fv(m_mv_matrix, 1,GL_FALSE, projMatrix.data());
         m_program->setUniformValue(m_view_matrix, viewMatrix);
         m_program->setUniformValue(m_proj_matrix, projMatrix);
 
@@ -325,18 +262,9 @@ void MainWindow::render()
 
             m_program->setUniformValue(m_light, lightPosition);
             m_program->setUniformValue(m_light_color, light_color);
-//          glDrawArrays(GL_TRIANGLES, 0, myMesh->v.size()/3);
             glDrawElements(GL_TRIANGLES, myMesh->v_f.size(), GL_UNSIGNED_INT, 0);
-//          glDrawElements(GL_TRIANGLES, myMesh->v_f.size(), GL_UNSIGNED_SHORT, &myMesh->v_f[0]);
         }
-        //glDisable(GL_BLEND);
-        //glEnable(GL_DEPTH_TEST);
-
     }
-
-
-//    glDisableVertexAttribArray(m_posAttr);
-//    glDisableVertexAttribArray(m_colAttr);
 
     m_program->release();
 
